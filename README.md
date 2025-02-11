@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# 📌 Projet : Lecteur d'Historique ChatGPT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## **🔍 Besoin & Contexte**
 
-## Available Scripts
+L'objectif de ce projet est de créer une **interface complète de gestion des historiques de conversations ChatGPT**. Le projet repose sur l'importation, le stockage et la visualisation des conversations extraites depuis un fichier JSON généré par ChatGPT.
 
-In the project directory, you can run:
+Le besoin principal est de **faciliter l'exploration et l'organisation** de ces conversations grâce à un système permettant :
 
-### `npm start`
+- L'archivage et le filtrage des conversations.
+- La navigation par dossiers et agents.
+- Une interface ergonomique pour afficher et parcourir les échanges.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **📂 Organisation du Dépôt**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### **1️⃣ API & Importation des Données**  *(Dossier : ****`API_Import_tests`****)*
 
-### `npm test`
+Ce dossier contient tous les scripts Python liés à l'importation des données et à l'API permettant de récupérer et manipuler les conversations.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `api.py` → API FastAPI fonctionnelle pour récupérer et gérer les conversations.
+- `import_db.py` → Script principal d'importation des conversations JSON vers SQLite.
+- `init_db.py` → Initialisation de la base de données SQLite.
+- `extract_gizmo_ids.py` → Script pour récupérer les identifiants des agents.
+- `generate_graphs.py` → Génération de statistiques sur l'utilisation de ChatGPT.
+- `TEST_import_affichage_terminal.py` & `TEST_compte_nbre_conversations.py` → Tests d'import et d'affichage pour vérifier la structure du JSON initial.
 
-### `npm run build`
+### **2️⃣ Frontend - Interface Utilisateur** *(Dossier : ****`src`**** & ****`public`****)*
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+L'interface web est développée en **React** et se compose de plusieurs composants :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `ConversationList.js` → Affichage des conversations disponibles.
+- `ConversationDetail.js` → Affichage détaillé d'une conversation.
+- `Sidebar.js` → Gestion des dossiers et filtres.
+- `App.js` → Point d'entrée principal de l'application React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### **3️⃣ Données & Configuration**
 
-### `npm run eject`
+- `chatgpt_history.db` → Base de données SQLite contenant les conversations importées.
+- `conversations.json` → Fichier JSON brut contenant les conversations extraites de ChatGPT.
+- `.gitignore` → Fichiers et dossiers ignorés dans le dépôt (ex. `node_modules/`, `.env`).
+- `package.json` → Dépendances et scripts pour le projet React.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## **📌 État de la Version Actuelle**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+✅ **Importation et stockage des conversations** dans SQLite.
+✅ **API opérationnelle** via FastAPI pour récupérer les conversations et les afficher.
+✅ **Interface React fonctionnelle** avec affichage des conversations.
+✅ **Système de dossiers** permettant de regrouper les conversations.
+✅ **Archivage et filtres** pour trier les conversations.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+🚧 **Problèmes en cours :**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- L'interface n'est pas encore totalement optimisée visuellement.
+- Amélioration du CSS et de l'affichage des conversations.
+- Organisation plus claire des fichiers et tests unitaires.
 
-## Learn More
+## **📜 Attentes pour la Suite (Verbatim du Cahier des Charges)**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Améliorer l'affichage de l'interface utilisateur**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   - Sidebar fixe en haut avec les dossiers (zone fixe).
+   - Liste des conversations en dessous avec ascenseur (zone mobile).
+   - Affichage détaillé des conversations dans une zone mobile distincte.
 
-### Code Splitting
+2. **Intégrer les interactions utilisateur**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   - Ajout d'un système de **favoris** et **classement par tags**.
+   - Possibilité de **modifier les noms des agents** directement depuis l'interface.
+   - **Boutons d'actions** clairs pour archiver, éditer ou supprimer des conversations.
 
-### Analyzing the Bundle Size
+3. **Optimisation des performances & UX**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   - Correction des bugs d'affichage et du style CSS.
+   - Chargement rapide des conversations sans ralentissement.
+   - Ajout d’une **recherche avancée** (par mots-clés, date, etc.).
 
-### Making a Progressive Web App
+## **📢 Contribuer & Contact**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Toute contribution est la bienvenue !
 
-### Advanced Configuration
+- Clonez le repo : `git clone https://github.com/strophe27/chatgpt-history.git`
+- Installez les dépendances backend : `pip install -r requirements.txt`
+- Lancez le backend : `uvicorn api:app --reload`
+- Installez les dépendances frontend : `npm install`
+- Lancez l'interface React : `npm start`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+🚀 **Prochaine étape : améliorer l'affichage et ajouter les interactions utilisateur !**
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
